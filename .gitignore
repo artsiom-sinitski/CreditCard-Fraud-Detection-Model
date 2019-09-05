@@ -1,5 +1,7 @@
 .vscode/
 logs/
+__pycache__
+Jupyter_Notebook/
 *.ipynb*
 *.log*
 *.txt
