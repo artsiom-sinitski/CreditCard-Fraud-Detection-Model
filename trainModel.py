@@ -15,7 +15,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.utils.multiclass import unique_labels
 
 from prepData import get_data
-from configSession import configure_session
+import configSession
 
 
 def build_NN_model(dims):
@@ -96,9 +96,6 @@ def plot_confusion_matrix(cm, classes,
 
 
 if __name__ == '__main__':
-    # Configure Keras session
-    configure_session()
-
     X_train, y_train, X_test, y_test = get_data()
     print("\nTrain/Test data length: %i / %i\n" % (len(X_train), len(X_test)))
 
@@ -111,6 +108,7 @@ if __name__ == '__main__':
         print("\n***** Model loaded! *****")
     else: # if the model file doesn't exist train it
         model = train_model(X_train, y_train, epochs, batches, X_test, y_test)
+        print("\n***** Model trained! *****")
         # Save model to use for classification later on
         model_name = 'models/model-%d-%d' % (epochs, batches)
         model.save(model_name + '.h5')
