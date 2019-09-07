@@ -96,36 +96,35 @@ def plot_confusion_matrix(cm, classes,
 
 
 if __name__ == '__main__':
-    X_train, y_train, X_test, y_test = get_data()
-    print("\nTrain/Test data length: %i / %i\n" % (len(X_train), len(X_test)))
-
     epochs = 5
     batches = 15
     model_file = "models/model-%d-%d.h5" % (epochs, batches)
 
     if os.path.exists(model_file):
-        model = load_model(model_file)
-        print("\n***** Model loaded! *****")
-    else: # if the model file doesn't exist train it
+        print("\n***** Trained model already exists! *****")
+    else:   # train the model and save it
+        X_train, y_train, X_test, y_test = get_data()
+        print("\nTrain/Test data length: %i / %i\n" % (len(X_train), len(X_test)))
+
         model = train_model(X_train, y_train, epochs, batches, X_test, y_test)
         print("\n***** Model trained! *****")
         # Save model to use for classification later on
         model_name = 'models/model-%d-%d' % (epochs, batches)
         model.save(model_name + '.h5')
 
-    title = '(epochs=%d, batch_size=%d)' % (epochs, batches)
+        title = '(epochs=%d, batch_size=%d)' % (epochs, batches)
 
-    # Test our model on data that has been seen
-    # (training data set) and unseen (test data set)
-    print("\n*** Evaluation for %s model ***" % title)
-    loss, acc = model.evaluate(X_train, y_train, verbose=2)
-    print("Train accuracy: %.2f%%" % (acc*100))
-    loss, acc = model.evaluate(X_test, y_test, verbose=2)
-    print(" Test accuracy: %.2f%%" % (acc*100))
+        # Test our model on data that has been seen
+        # (training data set) and unseen (test data set)
+        print("\n*** Evaluation for %s model ***" % title)
+        loss, acc = model.evaluate(X_train, y_train, verbose=2)
+        print("Train accuracy: %.2f%%" % (acc*100))
+        loss, acc = model.evaluate(X_test, y_test, verbose=2)
+        print(" Test accuracy: %.2f%%" % (acc*100))
 
-    # graph the confusion matrix
-    y_pred = model.predict(X_test)
-    y_test = pd.DataFrame(y_test)
-    cfx_matrix = confusion_matrix(y_test, y_pred.round())
+        # graph the confusion matrix
+        y_pred = model.predict(X_test)
+        y_test = pd.DataFrame(y_test)
+        cfx_matrix = confusion_matrix(y_test, y_pred.round())
 
-    plot_confusion_matrix(cfx_matrix, classes=[0,1])
+        plot_confusion_matrix(cfx_matrix, classes=[0,1])
