@@ -9,7 +9,6 @@ import configSession
 
     
 def get_data(path="data/Creditcard_txs-PRODUCTION.csv"):
-    path = "data/Creditcard_txs.csv"
     data = pd.read_csv(path)
     print("*** Data loaded from the file! ***")
 
@@ -37,7 +36,7 @@ if __name__ == '__main__':
     # Load the data set from a file
     X = np.array(get_data())
 
-    # preds = model.predict(X, batch_size=batches, verbose=1)
+    #fraud_predictions = model.predict(X, batch_size=batches, verbose=1)
     fraud_predictions = model.predict_classes(X, verbose=0)
     fraud_tx_idxs = np.where(fraud_predictions == 1)
 

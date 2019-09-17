@@ -1,7 +1,7 @@
 
 # CreditCard-Fraud-Detection-Model
 
-Determines if a credit card was used not by the owner
+Determines if a credit card was used maliciously, not by the original owner
 
 ## Table of Contents
 
@@ -35,25 +35,24 @@ and the one we will use to explore a number of different machine learning techni
 * Support Vector Machine (SVM) algorithm
 * Random Forest & Decision Tree algorithms
 * Confusion Matrix - to gauge the performance of the model
-* Synthetic Minority Oversampling Techinque (SMOTE) - a technique to 
-    We will be using a highly unballanced data set where the majority of the transactions are non-fraudelent.
-    SMOTE is used to balance the dataset
+* Synthetic Minority Oversampling Techinque (SMOTE) - a technique to used when one data set dominates the other.
+    We will be using a highly unballanced data set where the majority of the transactions are non-fraudelent,
+    so SMOTE is used to balance it.
 
 ## Usage
 
 - First, prepare the data for the model. In the command line type: 
 ```
-$> python prepData.py
+    $> python prepData.py
 ```
-- Second, train the model by running in the command line:
+- Second, train the model by running the line below in the command line. 
+  You will get notified if the model file already exists. 
 ```
-$> python trainModel.py
+    $> python trainModel.py <num_of_epochs> <num_of_batches>
 ```
-- Third, make the model predict by running from the command line:
+- Third, make the model predict fraudelent transactions by running from the command line:
 ```
     $> python detectCardFraud.py
-OR to make the model read tweets from "Tweets_samples.txt" file, type in:
-    $> cat ./data/Tweets_samples.txt | python predictTextMood.py default 7 32
 ```
 ## Team
 

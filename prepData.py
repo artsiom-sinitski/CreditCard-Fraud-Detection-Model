@@ -3,11 +3,12 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
 
-def get_data(path="data/Creditcard_txs.csv"):
+
+def get_data(path="data/Creditcard_txs-TRAIN.csv"):
     data = pd.read_csv(path)
     print("*** Loaded data from the file! ***")
 
-    # Normalize the amount values so it fits [-1, 1] range
+    # Normalize the 'Amount' column values, so they fit [-1, 1] range
     data['Norm_Amt'] = StandardScaler().fit_transform(data['Amount'].values.reshape(-1,1))
     # Remove unnecessary columns from the data set
     data = data.drop(['Amount','Time'], axis=1)
